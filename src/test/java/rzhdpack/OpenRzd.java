@@ -15,7 +15,7 @@ public class OpenRzd {
 
 	private static WebDriver driver = new FirefoxDriver();
 		
-	@Test
+	@Test //blankpush
 	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException {
 		driver.get("http://rzd.ru/");
 		List<WebElement> rzdLink = driver.findElements(By.xpath(
