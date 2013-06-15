@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="16089" started-at="2013-06-15T18:00:32Z" finished-at="2013-06-15T18:00:48Z">
+  <suite name="Suite" duration-ms="7693" started-at="2013-06-15T19:57:12Z" finished-at="2013-06-15T19:57:20Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="16089" started-at="2013-06-15T18:00:32Z" finished-at="2013-06-15T18:00:48Z">
+    <test name="Test" duration-ms="7693" started-at="2013-06-15T19:57:12Z" finished-at="2013-06-15T19:57:20Z">
       <class name="rzhdpack.OpenRzd">
-        <test-method status="PASS" signature="openRzdRuAndVerifyItIsOpened()[pri:0, instance:rzhdpack.OpenRzd@15cda3f]" name="openRzdRuAndVerifyItIsOpened" duration-ms="16075" started-at="2013-06-15T21:00:32Z" finished-at="2013-06-15T21:00:48Z">
+        <test-method status="PASS" signature="openRzdRuAndVerifyItIsOpened()[pri:0, instance:rzhdpack.OpenRzd@b82368]" name="openRzdRuAndVerifyItIsOpened" duration-ms="7678" started-at="2013-06-15T22:57:12Z" finished-at="2013-06-15T22:57:20Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openRzdRuAndVerifyItIsOpened -->

@@ -17,7 +17,7 @@ public class OpenRzd {
 		driver.get("http://rzd.ru/");
 		List<WebElement> rzdLink = driver.findElements(By.xpath(
 				"//a[@href='http://rzd.ru']"));
-		assertEquals(1, rzdLink.size());
+		assertEquals(0, rzdLink.size());
 		driver.close();
 	}
 
