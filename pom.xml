@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.mycompany.app</groupId>
-  <artifactId>my-app</artifactId>
+  <groupId>rzhdgroup</groupId>
+  <artifactId>rzhd</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>my-app</name>
+  <name>rzhd</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -15,16 +15,16 @@
   </properties>
 
   <dependencies>
-    <dependency>
+ <dependency>
    <groupId>org.seleniumhq.selenium</groupId>
    <artifactId>selenium-java</artifactId>
    <version>2.33.0</version>
   </dependency>
-  <dependency>
+ <dependency>
   <groupId>org.testng</groupId>
   <artifactId>testng</artifactId>
   <version>6.1.1</version>
   <scope>test</scope>
-</dependency>
+  </dependency>
   </dependencies>
 </project>
