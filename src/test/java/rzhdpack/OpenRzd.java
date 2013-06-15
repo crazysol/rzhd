@@ -10,6 +10,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.*;
 
+// comment
+
 public class OpenRzd {
 
 	private static WebDriver driver = new FirefoxDriver();
