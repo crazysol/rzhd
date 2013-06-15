@@ -19,7 +19,7 @@ public class OpenRzd {
 		driver.get("http://rzd.ru/");
 		List<WebElement> rzdLink = driver.findElements(By.xpath(
 				"//a[@href='http://rzd.ru']"));
-		assertEquals("Link wasn't found", 1, rzdLink.size());
+		assertEquals("Link wasn't found", 0, rzdLink.size());
 		
 	}
 	
