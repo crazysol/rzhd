@@ -13,7 +13,7 @@ import static org.testng.AssertJUnit.*;
 
 public class OpenRzd {
 
-	WebDriver driver = new FirefoxDriver();
+	private static WebDriver driver = new FirefoxDriver();
 		
 	@Test
 	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException {
