@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.*;
 
@@ -15,7 +14,7 @@ public class OpenRzd {
 
 	private static WebDriver driver = new FirefoxDriver();
 		
-	@Test //blankpush
+	@Test
 	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException {
 		driver.get("http://rzd.ru/");
 		List<WebElement> rzdLink = driver.findElements(By.xpath(
