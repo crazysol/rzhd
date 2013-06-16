@@ -11,53 +11,90 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import static org.testng.AssertJUnit.*;
 
 public class OpenRzd {
 	
+	@FindBy(css = "#name0")
+	WebElement arrTextBox;
+		
+	@FindBy(id = "name1")
+	WebElement depTextBox;
+	
+	@FindBy(id = "date0")
+	WebElement dateField;
+	
+	@FindBy(id = "Submit")
+	WebElement findButton;
+	
+	@FindBy(xpath = "//div[@id='Part0']//input[@name='car-type4']")
+	WebElement stateroomCheckbox;
+	
+	@FindBy(xpath = "//div[@id='Part0']//input[@name='car-type5']")
+	WebElement softStateroomCheckbox;
+	
+	@FindBy(xpath = "//div[@id='Part0']//input[@name='car-type6']")
+	WebElement luxCheckbox;
+	
+	@FindBy(xpath = "//div[@id='Part0']//button[contains(@class,'btn-color-grey btn-icon')]")
+	WebElement recalculateButton;
+	
+	@FindBy(xpath = "//div[@class='pass_IU_TrainChoice__trainList']//div[@class='trslot trainBlock']")
+	List<WebElement> trains;
+	
+	@FindBy(xpath = "")
+	
 	public static WebDriver driver = new FirefoxDriver();
+	
+	@BeforeTest
+	public void startFFAndOpenURL() throws InterruptedException {
 
+	    driver.get("http://rzd.ru");
+	    PageFactory.initElements(driver, this);
+
+	}
+	
+	private String arr;
+	private String dep;
+	private String date;
+	
+	public void readFromFile(String FileName) throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader(FileName));
+		arr = br.readLine();
+		dep = br.readLine();
+		date = br.readLine();		
+		br.close();
+	}
+	
 	@Test
 	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException, IOException {
 		Common common = new Common();
-		driver.get("http://rzd.ru/");
-		// List<WebElement> rzdLink = driver.findElements(By.xpath(
-		// "//a[@href='http://rzd.ru']"));
-		// assertEquals("Link wasn't found", 0, rzdLink.size());
+		this.readFromFile("config.txt");
 		
-		
-		BufferedReader br = new BufferedReader(new FileReader("config.xml"));
-		String arr = br.readLine();
-		String dep = br.readLine();
-		String date = br.readLine();		
-		br.close();
+		arrTextBox.sendKeys(arr);
+		depTextBox.sendKeys(dep);
+		dateField.clear();
+		dateField.sendKeys(date);
+		findButton.click();
 
-		driver.findElement(By.cssSelector("#name0")).sendKeys(arr);
-		driver.findElement(By.cssSelector("#name1")).sendKeys(dep);
-		driver.findElement(By.cssSelector("#date0")).clear();
+		common.waitForElementPresent(
+				"//div[@id='Part0']//input[@name='car-type4']");
 
-		driver.findElement(By.cssSelector("#date0")).sendKeys(date);
-		driver.findElement(By.cssSelector("#Submit")).click();
+		stateroomCheckbox.click();
+		softStateroomCheckbox.click();
+		luxCheckbox.click();
+		recalculateButton.click();
 
-		common.waitForElementPresent("//div[@id='Part0']//input[@name='car-type4']");
-
-		 driver.findElement(By.xpath("//div[@id='Part0']//input[@name='car-type4']")).click();
-		 driver.findElement(By.xpath("//div[@id='Part0']//input[@name='car-type5']")).click();
-		 driver.findElement(By.xpath("//div[@id='Part0']//input[@name='car-type6']")).click();
-
-		driver.findElement(
-				By.xpath("//div[@id='Part0']//button[contains(@class,'btn-color-grey btn-icon')]"))
-				.click();
-
-		List<WebElement> trains = driver
-				.findElements(By
-						.xpath("//div[@class='pass_IU_TrainChoice__trainList']//div[@class='trslot trainBlock']"));
-		
 		FileWriter writer = new FileWriter("output.txt");
 		for (WebElement train:trains)
 		{
+			List<List<String>> trains_table = new ArrayList <List<String>>();
+			List<String> train_row = new ArrayList<String>();
+			
 			String number = train.findElement(By.xpath(".//td[@class='pass_trListCol_2']//span[@class='train-num-0']")).getText();
 			String from = train.findElement(By.xpath(".//td[@class='pass_trListCol_3']//span[@class='train-time']")).getText() +
 					" " + train.findElement(By.xpath(".//td[@class='pass_trListCol_3']//b[@class='train-date']")).getText();
@@ -69,31 +106,21 @@ public class OpenRzd {
 			
 			String cost = train.findElement(By.xpath(".//td[@class='pass_trListCol_8 free-seats']//span")).getText();
 			
-			List<List<String>> trains_table = new ArrayList <List<String>> ();
-			
-			List<String> train_row = new ArrayList<String>();
 			train_row.add(number);
 			train_row.add(from);
 			train_row.add(to);
 			train_row.add(seats);
 			train_row.add(cost);
 			trains_table.add(train_row);
-			
-			 writer.write(number + " "+ from + " " + to + " " + seats + " " + cost + "\n"  );
-			
-			
-
+			for(String trainOption : train_row){
+			    writer.write(trainOption + " ");
+			    writer.write("\n");
+			}
 			System.out.println(trains_table);
-			// checks
-			
-			Thread.sleep(1000);
 		}
 		writer.close();
-		// common.waitForAjax();
-		Thread.sleep(10000);
-
 	}
-
+	
 	@AfterTest
 	public void closeBrowser() {
 		driver.close();
