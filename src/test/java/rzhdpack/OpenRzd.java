@@ -75,7 +75,7 @@ public class OpenRzd {
 			
 
 			System.out.println(trains_table);
-			
+			// checks
 			
 			Thread.sleep(1000);
 		}
