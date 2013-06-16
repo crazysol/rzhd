@@ -28,7 +28,11 @@ public class OpenRzd {
 		
 		driver.findElement(By.cssSelector("#date0")).sendKeys("30.06.2013");
 		driver.findElement(By.cssSelector("#Submit")).click();
-		Thread.sleep(10000);
+		
+		Common common = new Common();
+		
+		common.waitForAjax();
+		// Thread.sleep(10000);
 		
 		driver.findElement(By.xpath("//div[@id='Part0']//input[@name='car-type4']")).click();
 		driver.findElement(By.xpath("//div[@id='Part0']//input[@name='car-type5']")).click();
@@ -36,6 +40,7 @@ public class OpenRzd {
 		
 		driver.findElement(By.xpath("//div[@id='Part0']//button[contains(@class,'btn-color-grey btn-icon')]")).click();
 		
+		//common.waitForAjax();
 		Thread.sleep(10000);
 		
 		
