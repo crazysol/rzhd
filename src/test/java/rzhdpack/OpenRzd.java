@@ -74,14 +74,6 @@ public class OpenRzd {
 
 	}
 	
-	public void readFromFile(String FileName) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(FileName));
-		arr = br.readLine();
-		dep = br.readLine();
-		date = br.readLine();		
-		br.close();
-	}
-	
 	@Test
 	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException, IOException {
 		Common common = new Common();
@@ -93,8 +85,7 @@ public class OpenRzd {
 		dateField.sendKeys(date);
 		findButton.click();
 
-		common.waitForElementPresent(
-				"//div[@id='Part0']//input[@name='car-type4']");
+		common.waitForElementPresent("//div[@id='Part0']//input[@name='car-type4']");
 
 		stateroomCheckbox.click();
 		softStateroomCheckbox.click();
@@ -136,4 +127,12 @@ public class OpenRzd {
 		driver.close();
 	}
 
+	public void readFromFile(String FileName) throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader(FileName));
+		arr = br.readLine();
+		dep = br.readLine();
+		date = br.readLine();		
+		br.close();
+	}
+	
 }
