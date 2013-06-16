@@ -115,8 +115,8 @@ public class OpenRzd {
 			trains_table.add(train_row);
 			for(String trainOption : train_row){
 			    writer.write(trainOption + " ");
-			    writer.write("\n");
 			}
+			writer.write("\n");
 			System.out.println(trains_table);
 		}
 		writer.close();
