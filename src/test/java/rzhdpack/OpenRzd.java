@@ -77,7 +77,7 @@ public class OpenRzd {
 	@Test
 	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException, IOException {
 		Common common = new Common();
-		this.readFromFile("config.txt");
+		this.readFromFile("config.xml");
 		
 		arrTextBox.sendKeys(arr);
 		depTextBox.sendKeys(dep);
