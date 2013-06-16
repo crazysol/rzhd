@@ -118,7 +118,6 @@ public class OpenRzd {
 			}
 			writer.write("\n");
 			System.out.println(trains_table);
-			
 		}
 		writer.close();
 	}
