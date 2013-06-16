@@ -1,5 +1,7 @@
 package rzhdpack;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,12 +26,19 @@ public class OpenRzd {
 		// List<WebElement> rzdLink = driver.findElements(By.xpath(
 		// "//a[@href='http://rzd.ru']"));
 		// assertEquals("Link wasn't found", 0, rzdLink.size());
+		
+		
+		BufferedReader br = new BufferedReader(new FileReader("config.xml"));
+		String arr = br.readLine();
+		String dep = br.readLine();
+		String date = br.readLine();		
+		br.close();
 
-		driver.findElement(By.cssSelector("#name0")).sendKeys("Москва");
-		driver.findElement(By.cssSelector("#name1")).sendKeys("Харьков");
+		driver.findElement(By.cssSelector("#name0")).sendKeys(arr);
+		driver.findElement(By.cssSelector("#name1")).sendKeys(dep);
 		driver.findElement(By.cssSelector("#date0")).clear();
 
-		driver.findElement(By.cssSelector("#date0")).sendKeys("03.07.2013");
+		driver.findElement(By.cssSelector("#date0")).sendKeys(date);
 		driver.findElement(By.cssSelector("#Submit")).click();
 
 		common.waitForElementPresent("//div[@id='Part0']//input[@name='car-type4']");
