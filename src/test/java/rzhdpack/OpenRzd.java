@@ -45,10 +45,26 @@ public class OpenRzd {
 	
 	@FindBy(xpath = "//div[@class='pass_IU_TrainChoice__trainList']//div[@class='trslot trainBlock']")
 	List<WebElement> trains;
-	
-	@FindBy(xpath = "")
-	
+		
 	public static WebDriver driver = new FirefoxDriver();
+	
+	private String arr;
+	private String dep;
+	private String date;
+	private final String TRAIN_NUMBER_LOCATOR = 
+			".//td[@class='pass_trListCol_2']//span[@class='train-num-0']";
+	private final String TRAIN_FROM_TIME_LOCATOR = 
+			".//td[@class='pass_trListCol_3']//span[@class='train-time']";
+	private final String TRAIN_FROM_DATE_LOCATOR = 
+			".//td[@class='pass_trListCol_3']//b[@class='train-date']";
+	private final String TRAIN_TO_TIME_LOCATOR = 
+			".//td[@class='pass_trListCol_7']//span[@class='train-time']";
+	private final String TRAIN_TO_DATE_LOCATOR = 
+			".//td[@class='pass_trListCol_7']//b[@class='train-date']";
+	private final String SEATS_COUNT_LOCATOR = 
+			".//td[@class='pass_trListCol_8 free-seats']//b";
+	private final String TICKET_COST_LOCATOR = 
+			".//td[@class='pass_trListCol_8 free-seats']//span";
 	
 	@BeforeTest
 	public void startFFAndOpenURL() throws InterruptedException {
@@ -57,10 +73,6 @@ public class OpenRzd {
 	    PageFactory.initElements(driver, this);
 
 	}
-	
-	private String arr;
-	private String dep;
-	private String date;
 	
 	public void readFromFile(String FileName) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(FileName));
@@ -89,22 +101,20 @@ public class OpenRzd {
 		luxCheckbox.click();
 		recalculateButton.click();
 
+		
 		FileWriter writer = new FileWriter("output.txt");
 		for (WebElement train:trains)
 		{
 			List<List<String>> trains_table = new ArrayList <List<String>>();
 			List<String> train_row = new ArrayList<String>();
 			
-			String number = train.findElement(By.xpath(".//td[@class='pass_trListCol_2']//span[@class='train-num-0']")).getText();
-			String from = train.findElement(By.xpath(".//td[@class='pass_trListCol_3']//span[@class='train-time']")).getText() +
-					" " + train.findElement(By.xpath(".//td[@class='pass_trListCol_3']//b[@class='train-date']")).getText();
-			
-			String to = train.findElement(By.xpath(".//td[@class='pass_trListCol_7']//span[@class='train-time']")).getText() +
-					" " + train.findElement(By.xpath(".//td[@class='pass_trListCol_7']//b[@class='train-date']")).getText();
-			
-			String seats = train.findElement(By.xpath(".//td[@class='pass_trListCol_8 free-seats']//b")).getText();
-			
-			String cost = train.findElement(By.xpath(".//td[@class='pass_trListCol_8 free-seats']//span")).getText();
+			String number = train.findElement(By.xpath(TRAIN_NUMBER_LOCATOR)).getText();
+			String from = train.findElement(By.xpath(TRAIN_FROM_TIME_LOCATOR)).getText() +
+					" " + train.findElement(By.xpath(TRAIN_FROM_DATE_LOCATOR)).getText();
+			String to = train.findElement(By.xpath(TRAIN_TO_TIME_LOCATOR)).getText() +
+					" " + train.findElement(By.xpath(TRAIN_TO_DATE_LOCATOR)).getText();
+			String seats = train.findElement(By.xpath(SEATS_COUNT_LOCATOR)).getText();
+			String cost = train.findElement(By.xpath(TICKET_COST_LOCATOR)).getText();
 			
 			train_row.add(number);
 			train_row.add(from);
