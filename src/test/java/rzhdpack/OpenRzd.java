@@ -1,5 +1,7 @@
 package rzhdpack;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class OpenRzd {
 	public static WebDriver driver = new FirefoxDriver();
 
 	@Test
-	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException {
+	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException, IOException {
 		Common common = new Common();
 		driver.get("http://rzd.ru/");
 		// List<WebElement> rzdLink = driver.findElements(By.xpath(
@@ -44,7 +46,7 @@ public class OpenRzd {
 				.findElements(By
 						.xpath("//div[@class='pass_IU_TrainChoice__trainList']//div[@class='trslot trainBlock']"));
 		
-		
+		FileWriter writer = new FileWriter("output.txt");
 		for (WebElement train:trains)
 		{
 			String number = train.findElement(By.xpath(".//td[@class='pass_trListCol_2']//span[@class='train-num-0']")).getText();
@@ -67,11 +69,17 @@ public class OpenRzd {
 			train_row.add(seats);
 			train_row.add(cost);
 			trains_table.add(train_row);
+			
+			 writer.write(number + " "+ from + " " + to + " " + seats + " " + cost + "\n"  );
+			
+			
+
 			System.out.println(trains_table);
 			
 			
 			Thread.sleep(1000);
 		}
+		writer.close();
 		// common.waitForAjax();
 		Thread.sleep(10000);
 
