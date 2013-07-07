@@ -30,13 +30,14 @@ public class MainPage extends AbstractWebPage {
 	private String dep;
 	private String date;
 
-	public void fillFromToDateForm() throws IOException {
+	public AvailableTrainsPage fillFromToDateFormAndSubmit() throws IOException {
 		this.readFromFile("config.xml");
 		arrTextBox.sendKeys(arr);
 		depTextBox.sendKeys(dep);
 		dateField.clear();
 		dateField.sendKeys(date);
 		findButton.click();
+		return new AvailableTrainsPage(driver);
 	}
 
 	public void readFromFile(String FileName) throws IOException {
