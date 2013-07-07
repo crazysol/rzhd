@@ -14,6 +14,7 @@ public abstract class AbstractSelenium {
 	public void startFFAndOpenURL() throws InterruptedException {
 
 		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
 	    driver.get("http://rzd.ru");
 	    PageFactory.initElements(driver, this);
 

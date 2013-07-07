@@ -1,7 +1,5 @@
 package tests;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,22 +10,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
 
+import pages.MainPage;
+
 import rzhdpack.AbstractSelenium;
 import rzhdpack.Common;
 
 public class OpenRzd extends AbstractSelenium{
-	
-	@FindBy(css = "#name0")
-	WebElement arrTextBox;
-		
-	@FindBy(id = "name1")
-	WebElement depTextBox;
-	
-	@FindBy(id = "date0")
-	WebElement dateField;
-	
-	@FindBy(id = "Submit")
-	WebElement findButton;
 	
 	@FindBy(xpath = "//div[@id='Part0']//input[@name='car-type4']")
 	WebElement stateroomCheckbox;
@@ -44,9 +32,7 @@ public class OpenRzd extends AbstractSelenium{
 	@FindBy(xpath = "//div[@class='pass_IU_TrainChoice__trainList']//div[@class='trslot trainBlock']")
 	List<WebElement> trains;
 		
-	private String arr;
-	private String dep;
-	private String date;
+	
 	private final String TRAIN_NUMBER_LOCATOR = 
 			".//td[@class='pass_trListCol_2']//span[@class='train-num-0']";
 	private final String TRAIN_FROM_TIME_LOCATOR = 
@@ -65,14 +51,9 @@ public class OpenRzd extends AbstractSelenium{
 	@Test
 	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException, IOException {
 		Common common = new Common();
-		this.readFromFile("config.xml");
+		MainPage mainPage= new MainPage(driver);
+		mainPage.fillFromToDateForm();
 		
-		arrTextBox.sendKeys(arr);
-		depTextBox.sendKeys(dep);
-		dateField.clear();
-		dateField.sendKeys(date);
-		findButton.click();
-
 		common.waitForElementPresent("//div[@id='Part0']//input[@name='car-type4']");
 
 		stateroomCheckbox.click();
@@ -110,12 +91,6 @@ public class OpenRzd extends AbstractSelenium{
 		writer.close();
 	}
 	
-	public void readFromFile(String FileName) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(FileName));
-		arr = br.readLine();
-		dep = br.readLine();
-		date = br.readLine();		
-		br.close();
-	}
-	
 }
+	
+
