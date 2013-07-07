@@ -2,7 +2,7 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-      <class name="rzhdpack.OpenRzd"/>
+      <class name="tests.OpenRzd"/>
     </classes>
   </test>
 </suite>

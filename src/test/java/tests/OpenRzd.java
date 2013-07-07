@@ -1,4 +1,4 @@
-package rzhdpack;
+package tests;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,6 +11,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
+
+import rzhdpack.AbstractSelenium;
+import rzhdpack.Common;
 
 public class OpenRzd extends AbstractSelenium{
 	
