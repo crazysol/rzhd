@@ -2,12 +2,12 @@ package rzhdpack;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static rzhdpack.AbstractSelenium.driver;
 
-public class Common extends OpenRzd{
+
+public class Common {
 	
 	public void waitForElementPresent(String xpath){
 		WebDriverWait wait = new WebDriverWait(driver, 20);

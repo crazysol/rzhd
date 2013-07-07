@@ -8,16 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class OpenRzd {
+public class OpenRzd extends AbstractSelenium{
 	
 	@FindBy(css = "#name0")
 	WebElement arrTextBox;
@@ -46,8 +41,6 @@ public class OpenRzd {
 	@FindBy(xpath = "//div[@class='pass_IU_TrainChoice__trainList']//div[@class='trslot trainBlock']")
 	List<WebElement> trains;
 		
-	public static WebDriver driver = new FirefoxDriver();
-	
 	private String arr;
 	private String dep;
 	private String date;
@@ -65,14 +58,6 @@ public class OpenRzd {
 			".//td[@class='pass_trListCol_8 free-seats']//b";
 	private final String TICKET_COST_LOCATOR = 
 			".//td[@class='pass_trListCol_8 free-seats']//span";
-	
-	@BeforeTest
-	public void startFFAndOpenURL() throws InterruptedException {
-
-	    driver.get("http://rzd.ru");
-	    PageFactory.initElements(driver, this);
-
-	}
 	
 	@Test
 	public void openRzdRuAndVerifyItIsOpened() throws InterruptedException, IOException {
@@ -122,11 +107,6 @@ public class OpenRzd {
 		writer.close();
 	}
 	
-	@AfterTest
-	public void closeBrowser() {
-		driver.close();
-	}
-
 	public void readFromFile(String FileName) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(FileName));
 		arr = br.readLine();
