@@ -1,3 +1,4 @@
 #mygitignore
 target/
 test-output/
+output.txt
